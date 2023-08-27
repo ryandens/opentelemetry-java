@@ -5,6 +5,8 @@
 
 package io.opentelemetry.exporter.otlp.internal;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static io.opentelemetry.sdk.metrics.Aggregation.explicitBucketHistogram;
 
 import io.opentelemetry.sdk.autoconfigure.spi.ConfigProperties;
@@ -196,7 +198,7 @@ public final class OtlpConfigUtil {
 
   private static URL createUrl(URL context, String spec) {
     try {
-      return new URL(context, spec);
+      return Urls.create(context, spec, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     } catch (MalformedURLException e) {
       throw new ConfigurationException("Unexpected exception creating URL.", e);
     }
@@ -209,7 +211,7 @@ public final class OtlpConfigUtil {
     }
     URL endpointUrl;
     try {
-      endpointUrl = new URL(endpoint);
+      endpointUrl = Urls.create(endpoint, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     } catch (MalformedURLException e) {
       throw new ConfigurationException("OTLP endpoint must be a valid URL: " + endpoint, e);
     }
