@@ -78,7 +78,7 @@ public final class HttpExporterBuilder<T extends Marshaler> {
   }
 
   public HttpExporterBuilder<T> setCompression(String compressionMethod) {
-    this.compressionEnabled = compressionMethod.equals("gzip");
+    this.compressionEnabled = "gzip".equals(compressionMethod);
     return this;
   }
 

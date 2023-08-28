@@ -26,7 +26,7 @@ public final class ExporterBuilderUtil {
     }
 
     if (uri.getScheme() == null
-        || (!uri.getScheme().equals("http") && !uri.getScheme().equals("https"))) {
+        || (!"http".equals(uri.getScheme()) && !"https".equals(uri.getScheme()))) {
       throw new IllegalArgumentException(
           "Invalid endpoint, must start with http:// or https://: " + uri);
     }

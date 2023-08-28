@@ -105,10 +105,10 @@ final class LazyStorage {
 
     List<ContextStorageProvider> providers = new ArrayList<>();
     for (ContextStorageProvider provider : ServiceLoader.load(ContextStorageProvider.class)) {
-      if (provider
+      if ("io.opentelemetry.sdk.testing.context.SettableContextStorageProvider"
+          .equals(provider
           .getClass()
-          .getName()
-          .equals("io.opentelemetry.sdk.testing.context.SettableContextStorageProvider")) {
+          .getName())) {
         // Always use our testing helper context storage provider if it is on the classpath.
         return provider.get();
       }

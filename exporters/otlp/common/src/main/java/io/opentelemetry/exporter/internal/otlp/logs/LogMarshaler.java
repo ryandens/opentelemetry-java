@@ -55,8 +55,8 @@ final class LogMarshaler extends MarshalerWithSize {
         attributeMarshalers,
         logRecordData.getTotalAttributeCount() - logRecordData.getAttributes().size(),
         spanContext.getTraceFlags(),
-        spanContext.getTraceId().equals(INVALID_TRACE_ID) ? null : spanContext.getTraceId(),
-        spanContext.getSpanId().equals(INVALID_SPAN_ID) ? null : spanContext.getSpanId());
+        INVALID_TRACE_ID.equals(spanContext.getTraceId()) ? null : spanContext.getTraceId(),
+        INVALID_SPAN_ID.equals(spanContext.getSpanId()) ? null : spanContext.getSpanId());
   }
 
   private LogMarshaler(

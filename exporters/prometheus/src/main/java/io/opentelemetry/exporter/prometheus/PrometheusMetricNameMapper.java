@@ -53,7 +53,7 @@ class PrometheusMetricNameMapper implements BiFunction<MetricData, PrometheusTyp
       name = name + "_total";
     }
     // special case - gauge
-    if (rawMetric.getUnit().equals("1")
+    if ("1".equals(rawMetric.getUnit())
         && prometheusType == PrometheusType.GAUGE
         && !name.contains("ratio")) {
       name = name + "_ratio";

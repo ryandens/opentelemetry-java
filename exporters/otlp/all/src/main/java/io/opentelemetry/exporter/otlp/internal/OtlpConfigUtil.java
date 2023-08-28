@@ -62,7 +62,7 @@ public final class OtlpConfigUtil {
       BiConsumer<byte[], byte[]> setClientTls,
       Consumer<RetryPolicy> setRetryPolicy) {
     String protocol = getOtlpProtocol(dataType, config);
-    boolean isHttpProtobuf = protocol.equals(PROTOCOL_HTTP_PROTOBUF);
+    boolean isHttpProtobuf = PROTOCOL_HTTP_PROTOBUF.equals(protocol);
     URL endpoint =
         validateEndpoint(
             config.getString("otel.exporter.otlp." + dataType + ".endpoint"), isHttpProtobuf);
@@ -213,7 +213,7 @@ public final class OtlpConfigUtil {
     } catch (MalformedURLException e) {
       throw new ConfigurationException("OTLP endpoint must be a valid URL: " + endpoint, e);
     }
-    if (!endpointUrl.getProtocol().equals("http") && !endpointUrl.getProtocol().equals("https")) {
+    if (!"http".equals(endpointUrl.getProtocol()) && !"https".equals(endpointUrl.getProtocol())) {
       throw new ConfigurationException(
           "OTLP endpoint scheme must be http or https: " + endpointUrl.getProtocol());
     }
@@ -225,7 +225,7 @@ public final class OtlpConfigUtil {
       throw new ConfigurationException(
           "OTLP endpoint must not have a fragment: " + endpointUrl.getRef());
     }
-    if (!allowPath && (!endpointUrl.getPath().isEmpty() && !endpointUrl.getPath().equals("/"))) {
+    if (!allowPath && (!endpointUrl.getPath().isEmpty() && !"/".equals(endpointUrl.getPath()))) {
       throw new ConfigurationException(
           "OTLP endpoint must not have a path: " + endpointUrl.getPath());
     }

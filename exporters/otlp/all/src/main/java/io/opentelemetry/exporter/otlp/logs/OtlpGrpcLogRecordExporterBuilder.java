@@ -113,7 +113,7 @@ public final class OtlpGrpcLogRecordExporterBuilder {
   public OtlpGrpcLogRecordExporterBuilder setCompression(String compressionMethod) {
     requireNonNull(compressionMethod, "compressionMethod");
     checkArgument(
-        compressionMethod.equals("gzip") || compressionMethod.equals("none"),
+        "gzip".equals(compressionMethod) || "none".equals(compressionMethod),
         "Unsupported compression method. Supported compression methods include: gzip, none.");
     delegate.setCompression(compressionMethod);
     return this;
