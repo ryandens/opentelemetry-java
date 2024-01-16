@@ -72,13 +72,13 @@ final class StrictContextStorage implements ContextStorage, AutoCloseable {
     for (int i = 0; i < stackTrace.length; i++) {
       StackTraceElement element = stackTrace[i];
       if (element.getClassName().equals(Context.class.getName())
-          && element.getMethodName().equals("makeCurrent")) {
+          && "makeCurrent".equals(element.getMethodName())) {
         if (i + 2 < stackTrace.length) {
           StackTraceElement maybeResumptionElement = stackTrace[i + 2];
-          if (maybeResumptionElement
-                  .getClassName()
-                  .equals("kotlin.coroutines.jvm.internal.BaseContinuationImpl")
-              && maybeResumptionElement.getMethodName().equals("resumeWith")) {
+          if ("kotlin.coroutines.jvm.internal.BaseContinuationImpl"
+                  .equals(maybeResumptionElement
+                  .getClassName())
+              && "resumeWith".equals(maybeResumptionElement.getMethodName())) {
             throw new AssertionError(
                 "Attempting to call Context.makeCurrent from inside a Kotlin coroutine. "
                     + "This is not allowed. Use Context.asContextElement provided by "
@@ -168,28 +168,28 @@ final class StrictContextStorage implements ContextStorage, AutoCloseable {
       for (int i = 0; i < stackTrace.length; i++) {
         StackTraceElement element = stackTrace[i];
         if (element.getClassName().equals(StrictScope.class.getName())
-            && element.getMethodName().equals("close")) {
+            && "close".equals(element.getMethodName())) {
           int maybeResumeWithFrameIndex = i + 2;
           if (i + 1 < stackTrace.length) {
             StackTraceElement nextElement = stackTrace[i + 1];
-            if (nextElement.getClassName().equals("kotlin.jdk7.AutoCloseableKt")
-                && nextElement.getMethodName().equals("closeFinally")
+            if ("kotlin.jdk7.AutoCloseableKt".equals(nextElement.getClassName())
+                && "closeFinally".equals(nextElement.getMethodName())
                 && i + 2 < stackTrace.length) {
               // Skip extension method for AutoCloseable.use
               maybeResumeWithFrameIndex = i + 3;
             }
           }
-          if (stackTrace[maybeResumeWithFrameIndex].getMethodName().equals("invokeSuspend")) {
+          if ("invokeSuspend".equals(stackTrace[maybeResumeWithFrameIndex].getMethodName())) {
             // Skip synthetic invokeSuspend function.
             // NB: The stacktrace showed in an IntelliJ debug pane does not show this.
             maybeResumeWithFrameIndex++;
           }
           if (maybeResumeWithFrameIndex < stackTrace.length) {
             StackTraceElement maybeResumptionElement = stackTrace[maybeResumeWithFrameIndex];
-            if (maybeResumptionElement
-                    .getClassName()
-                    .equals("kotlin.coroutines.jvm.internal.BaseContinuationImpl")
-                && maybeResumptionElement.getMethodName().equals("resumeWith")) {
+            if ("kotlin.coroutines.jvm.internal.BaseContinuationImpl"
+                    .equals(maybeResumptionElement
+                    .getClassName())
+                && "resumeWith".equals(maybeResumptionElement.getMethodName())) {
               throw new AssertionError(
                   "Attempting to close a Scope created by Context.makeCurrent from inside a Kotlin "
                       + "coroutine. This is not allowed. Use Context.asContextElement provided by "

@@ -204,7 +204,7 @@ public final class ViewRegistry {
   // Visible for testing
   static Predicate<String> toGlobPatternPredicate(String globPattern) {
     // Match all
-    if (globPattern.equals("*")) {
+    if ("*".equals(globPattern)) {
       return unused -> true;
     }
 

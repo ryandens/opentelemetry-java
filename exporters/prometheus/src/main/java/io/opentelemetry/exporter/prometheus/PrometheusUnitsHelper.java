@@ -67,7 +67,7 @@ final class PrometheusUnitsHelper {
     }
     String[] rateEntities = rateExpressedUnit.split("/", 2);
     // Only convert rate expressed units if it's a valid expression
-    if (rateEntities[1].equals("")) {
+    if ("".equals(rateEntities[1])) {
       return rateExpressedUnit;
     }
     return getPrometheusUnit(rateEntities[0]) + "_per_" + getPrometheusPerUnit(rateEntities[1]);

@@ -237,7 +237,7 @@ public final class JaegerPropagator implements TextMapPropagator {
         if (value != null) {
           builder.put(key.substring(BAGGAGE_PREFIX.length()), value);
         }
-      } else if (key.equals(BAGGAGE_HEADER)) {
+      } else if (BAGGAGE_HEADER.equals(key)) {
         String value = getter.get(carrier, key);
         if (value != null) {
           if (builder == null) {

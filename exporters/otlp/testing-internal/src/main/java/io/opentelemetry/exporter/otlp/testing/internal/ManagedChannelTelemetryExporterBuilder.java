@@ -54,7 +54,7 @@ public final class ManagedChannelTelemetryExporterBuilder<T>
     delegate.setEndpoint(endpoint);
     URI uri = URI.create(endpoint);
     channelBuilder = ManagedChannelBuilder.forAddress(uri.getHost(), uri.getPort());
-    if (!uri.getScheme().equals("https")) {
+    if (!"https".equals(uri.getScheme())) {
       channelBuilder.usePlaintext();
     }
     // User-Agent can only be set at the channel level with upstream gRPC client. If a user wants

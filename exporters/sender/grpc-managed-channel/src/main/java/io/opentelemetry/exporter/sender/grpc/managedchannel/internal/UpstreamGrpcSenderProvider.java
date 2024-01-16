@@ -48,7 +48,7 @@ public class UpstreamGrpcSenderProvider implements GrpcSenderProvider {
     for (Map.Entry<String, String> entry : headers.entrySet()) {
       String name = entry.getKey();
       String value = entry.getValue();
-      if (name.equals("host")) {
+      if ("host".equals(name)) {
         authorityOverride = value;
         continue;
       }
