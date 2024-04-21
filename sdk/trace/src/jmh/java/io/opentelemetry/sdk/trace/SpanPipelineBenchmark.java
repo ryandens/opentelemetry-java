@@ -5,6 +5,8 @@
 
 package io.opentelemetry.sdk.trace;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
@@ -90,7 +92,7 @@ public class SpanPipelineBenchmark {
       try {
         String host = collector.getHost();
         Integer port = collector.getMappedPort(EXPOSED_PORT);
-        String address = new URL("http", host, port, "").toString();
+        String address = Urls.create("http", host, port, "", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString();
         return getSpanProcessor(address);
       } catch (MalformedURLException e) {
         throw new IllegalStateException("can't make a url", e);
