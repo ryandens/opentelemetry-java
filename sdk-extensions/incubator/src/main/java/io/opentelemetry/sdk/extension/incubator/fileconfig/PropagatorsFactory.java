@@ -63,10 +63,10 @@ final class PropagatorsFactory implements Factory<List<String>, ContextPropagato
 
   private static TextMapPropagator getPropagator(
       String name, NamedSpiManager<TextMapPropagator> spiPropagatorsManager) {
-    if (name.equals("tracecontext")) {
+    if ("tracecontext".equals(name)) {
       return W3CTraceContextPropagator.getInstance();
     }
-    if (name.equals("baggage")) {
+    if ("baggage".equals(name)) {
       return W3CBaggagePropagator.getInstance();
     }
 

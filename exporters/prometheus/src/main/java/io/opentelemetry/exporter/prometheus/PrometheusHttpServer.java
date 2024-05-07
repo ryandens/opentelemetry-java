@@ -238,7 +238,7 @@ public final class PrometheusHttpServer implements MetricReader {
     for (String encodingHeader : encodingHeaders) {
       String[] encodings = encodingHeader.split(",");
       for (String encoding : encodings) {
-        if (encoding.trim().equalsIgnoreCase("gzip")) {
+        if ("gzip".equalsIgnoreCase(encoding.trim())) {
           return true;
         }
       }
@@ -254,7 +254,7 @@ public final class PrometheusHttpServer implements MetricReader {
     String[] pairs = query.split("&");
     for (String pair : pairs) {
       int idx = pair.indexOf("=");
-      if (idx != -1 && URLDecoder.decode(pair.substring(0, idx), "UTF-8").equals("name[]")) {
+      if (idx != -1 && "name[]".equals(URLDecoder.decode(pair.substring(0, idx), "UTF-8"))) {
         names.add(URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
       }
     }

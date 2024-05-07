@@ -194,7 +194,7 @@ public final class W3CTraceContextPropagator implements TextMapPropagator {
     if (!VALID_VERSIONS.contains(version)) {
       return SpanContext.getInvalid();
     }
-    if (version.equals(VERSION_00) && traceparent.length() > TRACEPARENT_HEADER_SIZE) {
+    if (VERSION_00.equals(version) && traceparent.length() > TRACEPARENT_HEADER_SIZE) {
       return SpanContext.getInvalid();
     }
 

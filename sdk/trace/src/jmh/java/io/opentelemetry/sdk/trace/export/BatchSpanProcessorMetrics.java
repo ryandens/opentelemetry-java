@@ -42,7 +42,7 @@ public class BatchSpanProcessorMetrics {
     String labelValue = String.valueOf(dropped);
     OptionalLong value =
         allMetrics.stream()
-            .filter(metricData -> metricData.getName().equals("processedSpans"))
+            .filter(metricData -> "processedSpans".equals(metricData.getName()))
             .filter(metricData -> !metricData.isEmpty())
             .map(metricData -> metricData.getLongSumData().getPoints())
             .flatMap(Collection::stream)

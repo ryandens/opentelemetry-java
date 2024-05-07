@@ -199,7 +199,7 @@ final class SpanShim implements Span, ImplicitContextKeyed {
     String name = getEventNameFromFields(fields);
     Throwable throwable = null;
     boolean isError = false;
-    if (name.equals(ERROR)) {
+    if (ERROR.equals(name)) {
       throwable = findThrowable(fields);
       isError = true;
       if (throwable == null) {

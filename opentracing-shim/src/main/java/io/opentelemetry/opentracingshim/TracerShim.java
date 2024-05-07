@@ -133,7 +133,7 @@ final class TracerShim implements Tracer {
   }
 
   private static TracerProvider maybeUnobfuscate(TracerProvider tracerProvider) {
-    if (!tracerProvider.getClass().getSimpleName().equals("ObfuscatedTracerProvider")) {
+    if (!"ObfuscatedTracerProvider".equals(tracerProvider.getClass().getSimpleName())) {
       return tracerProvider;
     }
     try {
