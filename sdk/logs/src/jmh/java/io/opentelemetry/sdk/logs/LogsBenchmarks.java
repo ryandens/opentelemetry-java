@@ -5,6 +5,7 @@
 
 package io.opentelemetry.sdk.logs;
 
+import java.security.SecureRandom;
 import static java.util.stream.Collectors.joining;
 
 import io.opentelemetry.api.logs.Severity;
@@ -32,7 +33,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(1)
 public class LogsBenchmarks {
 
-  private static final Random RANDOM = new Random();
+  private static final Random RANDOM = new SecureRandom();
 
   @State(Scope.Benchmark)
   public static class BenchmarkState {

@@ -5,6 +5,7 @@
 
 package io.opentelemetry.sdk.internal;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -15,7 +16,7 @@ import java.util.function.Supplier;
 enum AndroidFriendlyRandomHolder implements Supplier<Random> {
   INSTANCE;
 
-  private static final Random random = new Random();
+  private static final Random random = new SecureRandom();
 
   @Override
   public Random get() {

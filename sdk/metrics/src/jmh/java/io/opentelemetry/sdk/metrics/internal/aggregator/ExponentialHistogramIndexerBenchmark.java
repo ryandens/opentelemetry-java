@@ -5,6 +5,7 @@
 
 package io.opentelemetry.sdk.metrics.internal.aggregator;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -40,7 +41,7 @@ public class ExponentialHistogramIndexerBenchmark {
 
     @Setup(Level.Trial)
     public final void setup() {
-      Random random = new Random();
+      Random random = new SecureRandom();
       int numValues = 2000;
       values = new double[numValues];
       for (int i = 0; i < numValues; i++) {
