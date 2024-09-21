@@ -5,6 +5,7 @@
 
 package io.opentelemetry.opentracingshim.testbed;
 
+import java.security.SecureRandom;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.opentelemetry.api.common.AttributeKey;
@@ -99,7 +100,7 @@ public final class TestUtils {
   /** Sleeps for a random period of time, expected to be under 1 second. */
   public static void sleep() {
     try {
-      TimeUnit.MILLISECONDS.sleep(new Random().nextInt(500));
+      TimeUnit.MILLISECONDS.sleep(new SecureRandom().nextInt(500));
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
       throw new IllegalStateException("Interrupted", e);

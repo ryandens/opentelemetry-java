@@ -5,6 +5,7 @@
 
 package io.opentelemetry.sdk.internal;
 
+import java.security.SecureRandom;
 import static java.util.stream.Collectors.joining;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,7 +66,7 @@ class ComponentRegistryTest {
   @SuppressWarnings("ReturnValueIgnored")
   void getComponents_HighConcurrency() throws ExecutionException, InterruptedException {
     List<Future<?>> futures = new ArrayList<>();
-    Random random = new Random();
+    Random random = new SecureRandom();
     int concurrency = 2;
     ExecutorService executor = Executors.newFixedThreadPool(concurrency);
 
