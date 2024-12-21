@@ -5,6 +5,7 @@
 
 package io.opentelemetry.opencensusshim;
 
+import java.security.SecureRandom;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
@@ -47,7 +48,7 @@ class OpenTelemetryTextFormatImplTest {
         }
       };
 
-  private static final Random RANDOM = new Random();
+  private static final Random RANDOM = new SecureRandom();
   private static final SpanContext SPAN_CONTEXT =
       SpanContext.create(
           TraceId.generateRandomId(RANDOM),

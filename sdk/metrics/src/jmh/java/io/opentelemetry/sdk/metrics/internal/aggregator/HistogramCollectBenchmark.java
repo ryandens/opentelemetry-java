@@ -18,6 +18,7 @@ import io.opentelemetry.sdk.metrics.export.MetricExporter;
 import io.opentelemetry.sdk.metrics.export.PeriodicMetricReader;
 import io.opentelemetry.sdk.metrics.internal.SdkMeterProviderUtil;
 import io.opentelemetry.sdk.metrics.internal.exemplar.ExemplarFilter;
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,7 +81,7 @@ public class HistogramCollectBenchmark {
       sdkMeterProvider = builder.build();
       histogram = sdkMeterProvider.get("meter").histogramBuilder("histogram").build();
 
-      random = new Random();
+      random = new SecureRandom();
       attributesList = new ArrayList<>(cardinality);
       String last = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
       for (int i = 0; i < cardinality; i++) {
